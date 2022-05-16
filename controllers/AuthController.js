@@ -27,7 +27,7 @@ const AuthController = {
             return res.status(200).json({usuario: usuario});
         } catch(err){
             console.log(err);
-            return res.status(500).json({error: 'Não foi possível processar a requisição'});
+            return res.status(400).json({error: 'Dados enviados de forma incorreta ou fora do padrão'});
         }
     },
 
@@ -46,6 +46,7 @@ const AuthController = {
             return res.status(201).json(novoUsuario);
         } catch(err){
             console.log(err);
+            return res.status(400).json({error:' Dados enviados de forma incorreta ou fora do padrão.'});
         }
     }
 };
