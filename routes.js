@@ -18,13 +18,13 @@ router.post('/login', AuthController.login);
 router.post('/usuarios', AuthController.registrar);
 
 //Usuarios
-router.put('/usuarios/:id', uploadProfile.single("photo"), UsuariosController.atualizarUsuario);
-router.delete('/usuarios/:id', UsuariosController.deletarUsuario);
+router.put('/usuarios/:id', isLogin, uploadProfile.single("photo"), UsuariosController.atualizarUsuario);
+router.delete('/usuarios/:id', isLogin, UsuariosController.deletarUsuario);
 
 //Amigos
 
 //Publicacões
-router.get('/publicacoes', PublicacoesController.exibirPublicacoes);
-router.post('/publicacoes', uploadPost.single("photo"),PublicacoesController.criarPublicacao);
+router.get('/publicacoes', isLogin, PublicacoesController.exibirPublicacoes);
+router.post('/publicacoes', isLogin, uploadPost.single("photo"),PublicacoesController.criarPublicacao);
 
 module.exports = router;

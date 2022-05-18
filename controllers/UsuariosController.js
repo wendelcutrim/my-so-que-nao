@@ -17,7 +17,7 @@ const UsuariosController = {
                 where: {id: id}
             });
 
-            const usuario = Usuario.findByPk(id)
+            const usuario = await Usuario.findByPk(id)
 
             return res.status(200).json(usuario);
 

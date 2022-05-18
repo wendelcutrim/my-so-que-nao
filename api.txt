@@ -19,3 +19,4 @@
 	/publicacoes/:id/curtidores 	[post]		Adiciona curtida a uma publicação
 
 	/feed				            [get]		Levanta publicações dos amigos (paginada. Decrescente por data)
+	JWT_KEY= "segredo"
