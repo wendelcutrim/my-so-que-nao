@@ -1,5 +1,37 @@
 @import url(geral.css);
 
+#registro {
+  width: 400px;
+  margin: 200px auto;
+  padding: 40px;
+  background-color: var(--primary-darker);
+  color: #FFF;
+  
+}
+
+#registro form {
+  display: flex;
+  flex-direction: column;
+}
+
+#registro form label span{
+  display: block;
+}
+
+#registro form label input{
+  width:100%
+}
+
+#registro .controles{
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#app{
+  display: none;
+}
+
 header {
   background-color: var(--primary);
   color: white;
