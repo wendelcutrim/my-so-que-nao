@@ -25,7 +25,7 @@
       </label>
       <label>
         <span>Confirme a senha:</span>
-        <input type="password" name="confirmacao">
+        <input type="password" name="confirmacao" onblur="verificaCampoPreenchido(event)">
       </label>
       <label class="foto-container">
         <span>Selecione uma foto:</span>
@@ -35,6 +35,7 @@
         <button>Cancelar</button>
         <button class="primary">Entrar</button>
       </div>
+      <img id="output" alt="">
     </form>
   </div>
 
