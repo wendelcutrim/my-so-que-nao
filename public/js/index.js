@@ -1,9 +1,10 @@
 //Verificar se o email foi preenchido:
 
-// Capturar o elemento input do email
+// Capturar os elementos do html para o JS
 let inputEmail = document.querySelector('#registro > form input[type=email]');
 let inputSenha = document.querySelector('#registro > form input[type=password]');
 let inputFile = document.querySelector('#registro > form input[type=file]');
+let form = document.getElementById('formularioCadastro');
 
 
 //Associar ao evento "perdeu o foco", uma função
@@ -19,15 +20,34 @@ const verificaCampoPreenchido = (event) => {
         event.target.setAttribute("placeholder", "")
 
     }
-}
+};
 
 const onFileChange = event => {
     let img = document.getElementById("output");
     img.src = URL.createObjectURL(event.target.files[0]);
    /*  img.style.marginTop = "20px" */
-}
+};
 
 inputEmail.addEventListener("blur", verificaCampoPreenchido);
 inputSenha.addEventListener("blur", verificaCampoPreenchido);
-inputFile.addEventListener("change", onFileChange)
+inputFile.addEventListener("change", onFileChange);
+//Adicionando evento de submit no form (quando clicar em entrar ou teclar enter, ele irá capturar);
+form.addEventListener("submit", (evt) => {
+    //Impedir o formulário de ser enviado
+    evt.preventDefault();
+    
+    //Levantando os dados do formulário:
+    let formData = new FormData(form);
+
+    //window.fetch() || fetch();
+    // 2 parâmetros: 1º endereço, 2º os dados.
+    fetch('http://localhost:3000/api/v1/usuarios', 
+    {
+        method: 'POST',
+        body: formData,
+        headers: {'Content-Type': 'multipart/form-data'}
+    });
+
+
+});
 
