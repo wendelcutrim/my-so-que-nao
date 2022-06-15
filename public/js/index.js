@@ -35,27 +35,28 @@ inputEmail.addEventListener("blur", verificaCampoPreenchido);
 inputSenha.addEventListener("blur", verificaCampoPreenchido);
 inputFile.addEventListener("change", onFileChange);
 
-let corpoDaRequisicao = {
+/* let corpoDaRequisicao = {
     nome: inputNome.value,
     email: inputEmail.value,
     senha: inputSenha.value
-}
+} */
+
 
 //Adicionando evento de submit no form (quando clicar em entrar ou teclar enter, ele irá capturar);
 form.addEventListener("submit", (evt) => {
     //Impedir o formulário de ser enviado
     evt.preventDefault();
-    
-    //Levantando os dados do formulário:
-    // let formData = new FormData(form);
+
+    //Pegando os dados do formulário
+    let formData = new FormData(form);
 
     //window.fetch() || fetch();
     // 2 parâmetros: 1º endereço, 2º os dados.
     fetch('http://localhost:3000/api/v1/usuarios', 
     {
         method: 'POST',
-        body: JSON.stringify(corpoDaRequisicao),
-        headers: {'Content-Type': 'application/json'}
+        body: formData,
+        // headers: {'Content-Type': 'multipart/form-data'}
     });
 
 
