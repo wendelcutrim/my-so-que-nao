@@ -6,6 +6,7 @@ let inputEmail = document.querySelector('#registro > form input[type=email]');
 let inputSenha = document.querySelector('#registro > form input[type=password]');
 let inputFile = document.querySelector('#registro > form input[type=file]');
 let form = document.getElementById('formularioCadastro');
+// let imgOutputRegister = document.querySelector("#output");
 
 
 //Associar ao evento "perdeu o foco", uma função
@@ -24,6 +25,7 @@ const verificaCampoPreenchido = (event) => {
 };
 
 const onFileChange = event => {
+
     let img = document.getElementById("output");
     img.src = URL.createObjectURL(event.target.files[0]);
    /*  img.style.marginTop = "20px" */
