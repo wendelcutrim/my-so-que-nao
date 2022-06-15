@@ -1,6 +1,7 @@
 //Verificar se o email foi preenchido:
 
 // Capturar os elementos do html para o JS
+let inputNome = document.querySelector('#registro > form input[type=text]');
 let inputEmail = document.querySelector('#registro > form input[type=email]');
 let inputSenha = document.querySelector('#registro > form input[type=password]');
 let inputFile = document.querySelector('#registro > form input[type=file]');
@@ -31,23 +32,29 @@ const onFileChange = event => {
 inputEmail.addEventListener("blur", verificaCampoPreenchido);
 inputSenha.addEventListener("blur", verificaCampoPreenchido);
 inputFile.addEventListener("change", onFileChange);
+
+let corpoDaRequisicao = {
+    nome: inputNome.value,
+    email: inputEmail.value,
+    senha: inputSenha.value
+}
+
 //Adicionando evento de submit no form (quando clicar em entrar ou teclar enter, ele irá capturar);
 form.addEventListener("submit", (evt) => {
     //Impedir o formulário de ser enviado
     evt.preventDefault();
     
     //Levantando os dados do formulário:
-    let formData = new FormData(form);
+    // let formData = new FormData(form);
 
     //window.fetch() || fetch();
     // 2 parâmetros: 1º endereço, 2º os dados.
     fetch('http://localhost:3000/api/v1/usuarios', 
     {
         method: 'POST',
-        body: formData,
-        headers: {'Content-Type': 'multipart/form-data'}
+        body: JSON.stringify(corpoDaRequisicao),
+        headers: {'Content-Type': 'application/json'}
     });
 
 
 });
-
