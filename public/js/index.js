@@ -8,7 +8,6 @@ let inputFile = document.querySelector('#registro > form input[type=file]');
 let form = document.getElementById('formularioCadastro');
 let imgOutputRegister = document.querySelector("#output");
 
-
 //Associar ao evento "perdeu o foco", uma função
 // Avisar ao usuário que o campo de email foi deixado em branco.
 const verificaCampoPreenchido = (event) => {
@@ -31,6 +30,7 @@ const onFileChange = event => {
    /*  img.style.marginTop = "20px" */
 };
 
+inputNome.addEventListener("blur", verificaCampoPreenchido);
 inputEmail.addEventListener("blur", verificaCampoPreenchido);
 inputSenha.addEventListener("blur", verificaCampoPreenchido);
 inputFile.addEventListener("change", onFileChange);
@@ -63,9 +63,35 @@ form.addEventListener("submit",
 
         if(response.status == 409){alert("Usuário já cadastrado")};
         if(response.status == 500){alert("Servidor indisponível")};
-        if(response.status == 201){alert("Registrado com sucesso... mudar para a página de login")};
+        if(response.status == 201){
+            let usuario = await response.json();
+            mostrarApp(usuario);
+        };
 
-        
-        let usuario = await response.json();
-        console.log(usuario);
 });
+
+//Vai esconder a div do registro, mostrar a div do APP e preencher o campo contaienr com as informações do usuário.
+function mostrarApp(usuario){
+    console.log(usuario);
+    //Esconder a div de registro
+    document.querySelector("#registro").style.display = "none";
+
+    //Mostrar a div da aplicação
+    document.querySelector("#app").style.display = "block";
+
+
+    //Preencher os locais com as informações do usuário.
+    //Nome
+    document.getElementById('app-nome').innerText = usuario.nome;
+
+    //Email
+    const appEmail = document.getElementById('app-email');
+    appEmail.email.innerText = usuario.email;
+    appEmail.setAttribute("href", `mailto:${usuario.email}`);
+
+    //Imagem
+    let imgAvatar = document.getElementById('app-avatar');
+    imgAvatar.setAttribute("alt", `Foto de ${usuario.nome}`);
+    imgAvatar.setAttribute("src", `img/avatares/${usuario.foto}`);
+
+}
