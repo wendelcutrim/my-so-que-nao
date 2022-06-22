@@ -6,7 +6,6 @@
     background-color: var(--primary-darker);
     color: #FFF;
     position: relative;
-
 }
 
 #login form {
@@ -24,27 +23,21 @@
     margin-bottom: 3px;
 }
 
-#login form label input {
-    width: 100%
+#login form label input{
+    width:100%
 }
-
-#login .controles {
+  
+#login .controles{
     display: flex;
     justify-content: space-between;
 }
 
-#login span {
+#login span{
     margin-top: 15px;
-}
+  }
 
 #login a {
     text-decoration: none;
     color: rgb(177, 177, 177);
     margin-top: 10px
-}
-
-#login a:hover {
-    border-bottom: 2px solid rgb(177, 177, 177);
-    color: white;
-    transition: all 0.6s;
 }

@@ -1,12 +1,13 @@
-//Verificar se o email foi preenchido:
-
 // Capturar os elementos do html para o JS
 let inputNome = document.querySelector('#registro > form input[type=text]');
 let inputEmail = document.querySelector('#registro > form input[type=email]');
 let inputSenha = document.querySelector('#registro > form input[type=password]');
+let inputConfirmacao = document.querySelector('#registro > form input[name=confirmacao]');
 let inputFile = document.querySelector('#registro > form input[type=file]');
 let form = document.getElementById('formularioCadastro');
 let imgOutputRegister = document.querySelector("#output");
+let formLogin = document.querySelector("#formularioLogin");
+let divLogin = document.querySelector("#login");
 
 //Associar ao evento "perdeu o foco", uma função
 // Avisar ao usuário que o campo de email foi deixado em branco.
@@ -75,6 +76,7 @@ function mostrarApp(usuario){
     console.log(usuario);
     //Esconder a div de registro
     document.querySelector("#registro").style.display = "none";
+    document.querySelector("#login").style.display = "none";
 
     //Mostrar a div da aplicação
     document.querySelector("#app").style.display = "block";
@@ -94,4 +96,26 @@ function mostrarApp(usuario){
     imgAvatar.setAttribute("alt", `Foto de ${usuario.nome}`);
     imgAvatar.setAttribute("src", `img/avatares/${usuario.foto}`);
 
+}
+
+//Função para logar o usuário
+formLogin.addEventListener("submit", onFormLoginsubmit);
+
+function onFormLoginsubmit(evt){
+    evt.preventDefault();
+    login();
+}
+
+async function login() {
+    let email = document.getElementById('login-email').value;
+    let senha = document.getElementById('login-senha').value;
+
+    let response = await fetch("http://localhost:3000/api/v1/usuarios/login", {
+        method: 'POST',
+        body: JSON.stringify({email, senha}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    
 }

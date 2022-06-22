@@ -1,6 +1,7 @@
 const { Usuario } = require('../models');
 const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     registrar: async (req, res) => {
@@ -56,6 +57,28 @@ module.exports = {
         } catch (error){
             console.log(error);
             return res.send({message: "Erro"});
+        }
+    },
+
+    login: async (req, res) => {
+        //return res.status(200).json(req.body);
+        try{
+            const { email, senha } = req.body;
+            const usuario = await Usuario.findOne({where: {email}});
+            if(!usuario){
+                return res.status(403).json("Falha no login");
+            }
+
+            if(!bcrypt.compareSync(senha, usuario.senha)){
+                return res.status(403).json("Falha no login");
+            }
+
+            let token = jwt.sign(usuario.toJSON(), process.env.JWT_KEY);
+
+            return res.status(200).json({msg:"Sucess", token});
+        } catch(error){
+            console.log(error);
+            return res.status(500).json("Error");
         }
     }
 };
