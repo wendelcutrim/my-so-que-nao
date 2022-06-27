@@ -88,7 +88,7 @@ function mostrarApp(usuario){
 
     //Email
     const appEmail = document.getElementById('app-email');
-    appEmail.email.innerText = usuario.email;
+    appEmail.innerText = usuario.email;
     appEmail.setAttribute("href", `mailto:${usuario.email}`);
 
     //Imagem
@@ -117,5 +117,16 @@ async function login() {
             'Content-Type': 'application/json'
         }
     });
+
+    //Verificar se o status da resposta é 200.
+    if(response.status == 200){
+        //Extraindo dados da response
+        let corpoDaResposta = await response.json();
+        // Salvar o token no localstorage
+        sessionStorage.setItem('token', corpoDaResposta.token);
+        sessionStorage.setItem('usuario', JSON.stringify(corpoDaResposta.usuario));
+        //Mudar para a página interna
+        mostrarApp(corpoDaResposta.usuario);
+    }
     
 }
