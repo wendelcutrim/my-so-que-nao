@@ -8,9 +8,35 @@ let form = document.getElementById('formularioCadastro');
 let imgOutputRegister = document.querySelector("#output");
 let formLogin = document.querySelector("#formularioLogin");
 let divLogin = document.querySelector("#login");
+let linkLogin = document.getElementById("link-login");
+let linkRegistro = document.getElementById("link-registro");
 
 //Associar ao evento "perdeu o foco", uma função
 // Avisar ao usuário que o campo de email foi deixado em branco.
+
+function onLinkRegistroClick(event){
+    event.preventDefault();
+    mostrarRegistro();
+}
+
+function onLinkLoginClick(event){
+    event.preventDefault();
+    mostrarLogin();
+}
+
+function mostrarRegistro(){
+    document.querySelector("#registro").style.display = "block";
+    document.querySelector("#login").style.display = "none";
+    document.querySelector("#app").style.display = "none";
+}
+
+function mostrarLogin(){
+    document.querySelector("#registro").style.display = "none";
+    document.querySelector("#login").style.display = "block";
+    document.querySelector("#app").style.display = "none";
+}
+
+
 const verificaCampoPreenchido = (event) => {
     console.log(event);
     
@@ -35,6 +61,9 @@ inputNome.addEventListener("blur", verificaCampoPreenchido);
 inputEmail.addEventListener("blur", verificaCampoPreenchido);
 inputSenha.addEventListener("blur", verificaCampoPreenchido);
 inputFile.addEventListener("change", onFileChange);
+linkRegistro.addEventListener("click", onLinkRegistroClick);
+linkLogin.addEventListener("click", onLinkLoginClick);
+
 
 /* let corpoDaRequisicao = {
     nome: inputNome.value,
@@ -127,6 +156,25 @@ async function login() {
         sessionStorage.setItem('usuario', JSON.stringify(corpoDaResposta.usuario));
         //Mudar para a página interna
         mostrarApp(corpoDaResposta.usuario);
+
+        //Carregar amigos do usuário
+        loadAmigos();
     }
     
+}
+
+async function loadAmigos(){
+    //disparar resuisição para get/amigos
+    let response = await fetch('http://localhost:3000/api/v1/amigos', 
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        }
+    );
+
+    console.log(response);
+
+    //exibir os amigos do usuário na tela.
 }
