@@ -178,3 +178,5 @@ async function loadAmigos(){
 
     //exibir os amigos do usuário na tela.
 }
+
+function mostrarAmigos(amigos){}
