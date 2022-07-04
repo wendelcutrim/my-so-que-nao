@@ -1,0 +1,14 @@
+//Backend
+//Realizar o envio das informações
+☐ Capturar formulário de publicação (id="formNovaPublicacao");
+☐ Criar o objeto form-data e enviar via POST para /api/v1/posts
+
+//Receber dados
+☐ Criar e usar um roteador PostsRouter **(Esta rota é protegida, necessita estar com um token)
+☐ Criar um middeware com multer (UploadPostImage), para tratar o upload (salvas imagens na pasta publica)
+☐ Criar e usar o controller PostsController (PostsController.adicionar)
+☐ Retornar como sucesso ou fracasso 
+
+//Frontend
+// Reagir ao resultado da requisição
+☐ Emitir uma mensagem de sucesso ou fracasso

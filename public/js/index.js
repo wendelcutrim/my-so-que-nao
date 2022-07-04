@@ -10,6 +10,8 @@ let formLogin = document.querySelector("#formularioLogin");
 let divLogin = document.querySelector("#login");
 let linkLogin = document.getElementById("link-login");
 let linkRegistro = document.getElementById("link-registro");
+let formNovaPublicacao = document.getElementById("formNovaPublicacao");
+let listaDeAmigos = document.getElementById("listaDeAmigos");
 
 //Associar ao evento "perdeu o foco", uma função
 // Avisar ao usuário que o campo de email foi deixado em branco.
@@ -173,10 +175,22 @@ async function loadAmigos(){
             }
         }
     );
-
-    console.log(response);
-
+    let amigos = await response.json();
+    console.log(amigos);
+    mostrarAmigos(amigos);
     //exibir os amigos do usuário na tela.
 }
 
-function mostrarAmigos(amigos){}
+function mostrarAmigos(amigos){
+    let string = "";
+    amigos.forEach(amigo => {
+        string +=`
+        <article>
+            <img src="img/avatares/${amigo.foto}" alt="Foto de ${amigo.nome}">
+            <span>${amigo.nome}</span>
+            <a href="mailto:${amigo.email}">${amigo.email}</a>
+        </article>
+        `
+    });
+    listaDeAmigos.innerHTML = string;
+}
